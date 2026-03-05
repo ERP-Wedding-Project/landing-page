@@ -1,5 +1,7 @@
 "use client";
 
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -21,86 +23,10 @@ export default function Home() {
         <div className="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col max-w-[1200px] flex-1 w-full">
             {/* Header */}
-            <header
-              className={`flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-4 md:px-10 py-3 mb-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md rounded-2xl sticky top-4 z-50 transition-all ${isScrolled ? "shadow-lg" : ""
-                }`}
-            >
-              <div className="flex items-center gap-4 text-primary">
-                <span className="material-symbols-outlined text-2xl">favorite</span>
-                <h2 className="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-[-0.015em]">
-                  Wedhub
-                </h2>
-              </div>
-              <div className="hidden md:flex flex-1 justify-end gap-8 items-center">
-                <nav className="flex items-center gap-9">
-                  <Link
-                    href="#"
-                    className="text-slate-700 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium leading-normal"
-                  >
-                    Fitur
-                  </Link>
-                  <Link
-                    href="#"
-                    className="text-slate-700 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium leading-normal"
-                  >
-                    Cara Kerja
-                  </Link>
-                  <Link
-                    href="#"
-                    className="text-slate-700 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium leading-normal"
-                  >
-                    Testimoni
-                  </Link>
-                </nav>
-                <div className="flex gap-2">
-                  <button className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-transparent text-primary hover:bg-primary/10 transition-all text-sm font-bold leading-normal tracking-[0.015em]">
-                    <span className="truncate">Masuk</span>
-                  </button>
-                  <button className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-secondary text-white hover:bg-primary transition-all text-sm font-bold leading-normal tracking-[0.015em] shadow-md hover:shadow-lg">
-                    <span className="truncate">Mulai Merencanakan</span>
-                  </button>
-                </div>
-              </div>
-            </header>
+            <Header isScrolled={isScrolled} />
 
             {/* Hero Section */}
-            <section className="w-full mb-20">
-              <div className="p-0 md:p-4 relative">
-                {/* Decorative floating elements */}
-                <div className="absolute top-10 left-10 w-4 h-4 bg-secondary/40 rounded-full blur-[2px] z-20"></div>
-                <div className="absolute bottom-20 right-20 w-6 h-6 bg-primary/30 rounded-full blur-[1px] z-20"></div>
-                <div className="absolute top-1/2 right-1/4 w-3 h-3 bg-secondary/50 rounded-full blur-[2px] z-20"></div>
-
-                <div
-                  className="flex min-h-[600px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-2xl items-center justify-center p-8 relative overflow-hidden shadow-2xl"
-                  style={{
-                    backgroundImage: `linear-gradient(rgba(33, 17, 21, 0.4) 0%, rgba(33, 17, 21, 0.7) 100%), url("/hero_wedding.png")`,
-                  }}
-                >
-                  <div className="flex flex-col gap-6 text-center relative z-10 max-w-3xl items-center">
-                    <div className="bg-white/90 dark:bg-slate-800/90 text-primary px-6 py-3 rounded-full text-sm font-bold tracking-widest uppercase shadow-lg border border-primary/20 relative">
-                      Perencanaan Pernikahan Profesional
-                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white/90 dark:bg-slate-800/90 rotate-45 border-b border-r border-primary/20"></div>
-                    </div>
-                    <h1 className="text-white text-5xl font-black leading-tight tracking-[-0.033em] md:text-7xl drop-shadow-lg">
-                      Mulai Rencanakan Pernikahan Impian Anda
-                    </h1>
-                    <p className="text-white/90 text-lg font-medium leading-relaxed max-w-2xl drop-shadow-md">
-                      Paduan sempurna antara keanggunan floral dan manajemen profesional. Kelola anggaran, daftar tamu,
-                      dan tugas dengan mudah.
-                    </p>
-                    <div className="flex flex-wrap gap-4 flex justify-center relative z-10 mt-6">
-                      <button className="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-8 bg-gradient-cta text-white hover:scale-105 transition-transform text-lg font-bold leading-normal tracking-[0.015em] shadow-xl shadow-primary/30">
-                        <span className="truncate">Mulai Merencanakan</span>
-                      </button>
-                      <button className="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-8 bg-white/10 text-white backdrop-blur-md border border-white/30 hover:bg-white/20 transition-all text-lg font-bold leading-normal tracking-[0.015em]">
-                        <span className="truncate">Lihat Demo</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <Hero />
 
             {/* How It Works */}
             <section className="flex flex-col gap-10 px-4 py-16 mb-10">
@@ -120,8 +46,8 @@ export default function Home() {
                 ].map((step, idx) => (
                   <div key={idx} className="flex-1 flex flex-col items-center text-center gap-4 relative z-10 group cursor-pointer">
                     <div className={`w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 group-hover:-translate-y-2 ${step.highlighted
-                        ? "bg-background-light dark:bg-slate-800 border-2 border-primary"
-                        : "bg-white dark:bg-slate-800 border border-primary/30 group-hover:bg-primary/5"
+                      ? "bg-background-light dark:bg-slate-800 border-2 border-primary"
+                      : "bg-white dark:bg-slate-800 border border-primary/30 group-hover:bg-primary/5"
                       }`}>
                       <span className="material-symbols-outlined text-4xl text-primary">{step.icon}</span>
                     </div>
@@ -148,8 +74,8 @@ export default function Home() {
                     { title: "Survey Katering", meta: "Tenggat: 20 Okt • Anggaran: Rp 50Jt", completed: false },
                   ].map((item, idx) => (
                     <div key={idx} className={`flex items-start gap-4 p-4 rounded-xl transition-colors cursor-pointer border ${item.completed
-                        ? "bg-primary/5 border-primary/20 opacity-70"
-                        : "bg-slate-50 dark:bg-slate-700/50 hover:bg-primary/5 border-transparent hover:border-primary/20"
+                      ? "bg-primary/5 border-primary/20 opacity-70"
+                      : "bg-slate-50 dark:bg-slate-700/50 hover:bg-primary/5 border-transparent hover:border-primary/20"
                       }`}>
                       <div className={`w-6 h-6 rounded-full flex-shrink-0 mt-1 flex items-center justify-center ${item.completed ? "bg-primary text-white" : "border-2 border-primary/50"
                         }`}>

@@ -5,9 +5,9 @@
   --color-secondary: #E3B7A0;
   --color-background-light: #FFEDDB;
   --color-background-dark: #211115;
-  
+
   --font-display: "Epilogue", sans-serif;
-  
+
   --radius-DEFAULT: 1rem;
   --radius-lg: 2rem;
   --radius-xl: 3rem;
@@ -16,13 +16,15 @@
 
 :root {
   --background: #FFEDDB;
-  --foreground: #0f172a; /* slate-900 */
+  --foreground: #0f172a;
+  /* slate-900 */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #211115;
-    --foreground: #f1f5f9; /* slate-100 */
+    --foreground: #f1f5f9;
+    /* slate-100 */
   }
 }
 
