@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode for Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: #BF9270;
   --color-secondary: #E3B7A0;
@@ -28,8 +31,9 @@
   --shadow-glow: 0 0 40px rgba(191, 146, 112, 0.15);
 }
 
+/* System preference dark mode (only if no manual override) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light) {
     --background: #1A0E12;
     --foreground: #F5EDE6;
     --glass: rgba(26, 14, 18, 0.6);
@@ -37,6 +41,16 @@
     --shadow-glow: 0 0 40px rgba(191, 146, 112, 0.1);
   }
 }
+
+/* Manual dark class on <html> */
+html.dark {
+  --background: #1A0E12;
+  --foreground: #F5EDE6;
+  --glass: rgba(26, 14, 18, 0.6);
+  --glass-border: rgba(191, 146, 112, 0.15);
+  --shadow-glow: 0 0 40px rgba(191, 146, 112, 0.1);
+}
+
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -97,6 +111,11 @@ body {
     background: rgba(42, 24, 32, 0.7);
     border: 1px solid rgba(191, 146, 112, 0.15);
   }
+}
+
+html.dark .glass-card {
+  background: rgba(42, 24, 32, 0.7);
+  border: 1px solid rgba(191, 146, 112, 0.15);
 }
 
 /* ===== ANIMATIONS ===== */

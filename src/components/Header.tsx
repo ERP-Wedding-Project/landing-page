@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import React, { useEffect, useRef } from 'react';
+import { useTheme } from '@/context/ThemeContext';
 
 export default function Header({ isScrolled }: { isScrolled: boolean }) {
   const navRef = useRef<HTMLElement>(null);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const links = navRef.current?.querySelectorAll("a");
@@ -58,6 +60,39 @@ export default function Header({ isScrolled }: { isScrolled: boolean }) {
 
       {/* Actions */}
       <div className="hidden md:flex items-center gap-3">
+        {/* Theme Toggle Button */}
+        <button
+          id="theme-toggle-btn"
+          onClick={toggleTheme}
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          className="relative w-9 h-9 flex items-center justify-center rounded-full border border-primary/20 bg-white/60 dark:bg-slate-800/60 hover:bg-primary/10 dark:hover:bg-primary/20 transition-all duration-300 shadow-sm hover:shadow-[0_0_12px_rgba(191,146,112,0.35)] group overflow-hidden"
+        >
+          {/* Sun icon (shown in dark mode to switch to light) */}
+          <span
+            className={`material-symbols-outlined text-amber-500 text-[18px] absolute transition-all duration-300 ${
+              theme === 'dark'
+                ? 'opacity-100 rotate-0 scale-100'
+                : 'opacity-0 rotate-90 scale-50'
+            }`}
+            style={{ fontVariationSettings: "'FILL' 1" }}
+          >
+            light_mode
+          </span>
+          {/* Moon icon (shown in light mode to switch to dark) */}
+          <span
+            className={`material-symbols-outlined text-slate-600 dark:text-slate-300 text-[18px] absolute transition-all duration-300 ${
+              theme === 'light'
+                ? 'opacity-100 rotate-0 scale-100'
+                : 'opacity-0 -rotate-90 scale-50'
+            }`}
+            style={{ fontVariationSettings: "'FILL' 1" }}
+          >
+            dark_mode
+          </span>
+          {/* Glow ring on hover */}
+          <span className="absolute inset-0 rounded-full ring-0 ring-primary/30 group-hover:ring-2 transition-all duration-300" />
+        </button>
+
         <button className="text-primary font-semibold text-sm px-5 py-2 rounded-full hover:bg-primary/10 transition-all duration-300">
           Masuk
         </button>
@@ -67,10 +102,42 @@ export default function Header({ isScrolled }: { isScrolled: boolean }) {
         </button>
       </div>
 
-      {/* Mobile Menu Button */}
-      <button className="md:hidden text-primary p-2 rounded-xl hover:bg-primary/10 transition-colors">
-        <span className="material-symbols-outlined text-xl">menu</span>
-      </button>
+      {/* Mobile Right Side: Theme Toggle + Hamburger */}
+      <div className="md:hidden flex items-center gap-2">
+        {/* Theme Toggle (mobile) */}
+        <button
+          id="theme-toggle-btn-mobile"
+          onClick={toggleTheme}
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          className="relative w-9 h-9 flex items-center justify-center rounded-full border border-primary/20 bg-white/60 dark:bg-slate-800/60 hover:bg-primary/10 dark:hover:bg-primary/20 transition-all duration-300 overflow-hidden"
+        >
+          <span
+            className={`material-symbols-outlined text-amber-500 text-[18px] absolute transition-all duration-300 ${
+              theme === 'dark'
+                ? 'opacity-100 rotate-0 scale-100'
+                : 'opacity-0 rotate-90 scale-50'
+            }`}
+            style={{ fontVariationSettings: "'FILL' 1" }}
+          >
+            light_mode
+          </span>
+          <span
+            className={`material-symbols-outlined text-slate-600 dark:text-slate-300 text-[18px] absolute transition-all duration-300 ${
+              theme === 'light'
+                ? 'opacity-100 rotate-0 scale-100'
+                : 'opacity-0 -rotate-90 scale-50'
+            }`}
+            style={{ fontVariationSettings: "'FILL' 1" }}
+          >
+            dark_mode
+          </span>
+        </button>
+
+        {/* Hamburger */}
+        <button className="text-primary p-2 rounded-xl hover:bg-primary/10 transition-colors">
+          <span className="material-symbols-outlined text-xl">menu</span>
+        </button>
+      </div>
     </header>
   );
 }
